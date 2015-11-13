@@ -1,0 +1,6 @@
+test.js
+*.sublime-*
+.gitignore
+.editorconfig
+.nvmrc
+.travis.yml

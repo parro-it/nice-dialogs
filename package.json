@@ -1,0 +1,30 @@
+{
+  "name": "nice-dialogs",
+  "version": "0.0.0",
+  "description": "",
+  "repository": "https://github.com/parro-it/nice-dialogs.git",
+  "bugs": {
+    "url": "https://github.com/parro-it/nice-dialogs/issues"
+  },
+  "author": "parro-it",
+  "scripts": {
+    "build": "babel src/index.js > index.js",
+    "test": "babel-node test",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "engines": {
+    "node": ">=5"
+  },
+  "eslintConfig": {
+    "extends": "devenv"
+  },
+  "babel": {
+    "presets": ["es2015-node5"]
+  },
+  "esnext:main": "src/index.js",
+  "devDependencies": {
+    "babel-preset-es2015-node5": "^1.0.0",
+    "tape": "^4.2.2"
+  }
+}
