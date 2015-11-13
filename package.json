@@ -6,7 +6,7 @@
   "author": "parro-it",
   "scripts": {
     "build": "babel src/index.js > index.js",
-    "test": "eslint . && babel-node test",
+    "test": "eslint . && babel-node test | faucet",
     "prepublish": "npm run build"
   },
   "keywords": [],
@@ -24,6 +24,7 @@
   "esnext:main": "src/index.js",
   "devDependencies": {
     "babel-preset-es2015-node5": "^1.0.0",
+    "co": "^4.6.0",
     "nightmare": "^2.0.7",
     "tape": "^4.2.2"
   },
@@ -31,5 +32,6 @@
     "readme.md",
     "index.js",
     "src/index.js"
-  ]
+  ],
+  "dependencies": {}
 }

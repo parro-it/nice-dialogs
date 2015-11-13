@@ -1,18 +1,27 @@
 import test from 'tape';
 // import niceDialogs from './src';
-import nightmare from 'nightmare';
+import Nightmare from 'nightmare';
+import co from 'co';
 
-test('it work!', t => {
+test('it work!', co.wrap(function * (t) {
   // const result = niceDialogs();
 
-  nightmare()
+  const nightmare = new Nightmare({ show: true });
+  const link = yield nightmare
     .goto('http://yahoo.com')
-    .type('input[title="Search"]', 'github nightmare')
-    .click('.searchsubmit');
+    .type('input', 'github nightmare')
+    .click('#UHSearchWeb')
+    .wait('.td-u')
+    .evaluate(() => {
+      return document.getElementsByClassName('td-u')[0].href;
+    });
+
+  yield nightmare.end();
+  process.stdout.write(link);
 
   // t.equal(result, 42);
   t.end();
-});
+}));
 
 /*
 app.commands.register('alert', co.wrap(function * () {
