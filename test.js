@@ -6,20 +6,26 @@ import co from 'co';
 test('it work!', co.wrap(function * (t) {
   // const result = niceDialogs();
 
-  const nightmare = new Nightmare({ show: true });
-  const link = yield nightmare
-    .goto('http://yahoo.com')
-    .type('input', 'github nightmare')
-    .click('#UHSearchWeb')
-    .wait('.td-u')
+  const nightmare = new Nightmare({
+    show: true,
+    'web-preferences': {
+      preload: `${__dirname}/test-starter.js`,
+      'web-security': false
+    }
+  });
+  yield nightmare
+    .goto('about://blank')
     .evaluate(() => {
-      return document.getElementsByClassName('td-u')[0].href;
-    });
+      try {
+        window.dialogs.alert('This is the alert message', 'Info');
+      } catch (err) {
+        alert(err.stack) // eslint-disable-line
+      }
+    })
+    .wait('#alert-dialog');
 
+  t.ok(nightmare.visible('#alert-dialog main'));
   yield nightmare.end();
-  process.stdout.write(link);
-
-  // t.equal(result, 42);
   t.end();
 }));
 

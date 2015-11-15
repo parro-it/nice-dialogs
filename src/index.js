@@ -1,5 +1,4 @@
-import { readFileSync } from 'fs';
-
+const readFileSync = require('fs').readFileSync;
 const alertTemplate = readFileSync(`${__dirname}/alert-template.html`);
 const confirmTemplate = readFileSync(`${__dirname}/confirm-template.html`);
 
