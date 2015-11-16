@@ -13,44 +13,47 @@ function createNightmare() {
   });
 }
 
-function * openAlert(nightmare) {
-  yield nightmare
-    .goto('about://blank')
-    .evaluate(() => {
-      window.dialogs.alert('This is the alert message', 'Info');
-    })
-    .wait('#alert-dialog');
-}
+const mkUtils = dialogSelector => ({
+  openAlert(nightmare) {
+    return nightmare
+      .goto('about://blank')
+      .evaluate(() => {
+        window.dialogs.alert('This is the alert message', 'Info');
+      })
+      .wait(dialogSelector);
+  },
 
-function dialogIsOpened(nightmare) {
-  return nightmare.evaluate(() => document.querySelector('#alert-dialog').open);
-}
+  dialogIsOpened(nightmare) {
+    return nightmare.evaluate(s => document.querySelector(s).open, dialogSelector);
+  },
 
-function getTitle(nightmare) {
-  return nightmare.evaluate(() => document.querySelector('#alert-dialog h1').innerText);
-}
+  getTitle(nightmare) {
+    return nightmare.evaluate(s => document.querySelector(s + ' h1').innerText, dialogSelector);
+  },
 
-function getMessage(nightmare) {
-  return nightmare.evaluate(() => document.querySelector('#alert-dialog main').innerText);
-}
+  getMessage(nightmare) {
+    return nightmare.evaluate(s => document.querySelector(s + ' main').innerText, dialogSelector);
+  }
+});
+
 
 test('it work!', co.wrap(function * (t) {
   const nightmare = createNightmare();
+  const utils = mkUtils('#alert-dialog');
 
-  yield openAlert(nightmare);
+  yield utils.openAlert(nightmare);
 
   t.ok(nightmare.visible('#alert-dialog main'));
 
-  t.ok(yield dialogIsOpened(nightmare));
+  t.ok(yield utils.dialogIsOpened(nightmare));
+  t.equal('This is the alert message', yield utils.getMessage(nightmare));
 
-  t.equal('This is the alert message', yield getMessage(nightmare));
-
-  t.equal('Info', yield getTitle(nightmare));
+  t.equal('Info', yield utils.getTitle(nightmare));
 
   yield nightmare
     .click('#alert-dialog .ok');
 
-  t.ok(!(yield dialogIsOpened(nightmare)));
+  t.ok(!(yield utils.dialogIsOpened(nightmare)));
 
 
   yield nightmare.end();

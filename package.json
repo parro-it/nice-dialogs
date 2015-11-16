@@ -26,7 +26,6 @@
   "devDependencies": {
     "babel-preset-es2015-node5": "^1.0.0",
     "co": "^4.6.0",
-    "eslint-config-devenv": "^1.1.0",
     "nightmare": "^2.0.7",
     "tape": "^4.2.2"
   },
