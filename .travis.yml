@@ -1,4 +1,6 @@
-language: node_js
+language: node_j
+node_js:
+  - 'stable'
 sudo: false
 addons:
   apt:
