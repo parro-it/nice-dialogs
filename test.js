@@ -3,28 +3,32 @@ import test from 'tape';
 import Nightmare from 'nightmare';
 import co from 'co';
 
-test('it work!', co.wrap(function * (t) {
-  // const result = niceDialogs();
-
-  const nightmare = new Nightmare({
-    show: true,
+function createNightmare() {
+  return new Nightmare({
+    show: false,
     'web-preferences': {
-      preload: `${__dirname}/test-starter.js`,
+      preload: `${__dirname}/test-preload.js`,
       'web-security': false
     }
   });
+}
+
+function * openAlert(nightmare) {
   yield nightmare
     .goto('about://blank')
     .evaluate(() => {
-      try {
-        window.dialogs.alert('This is the alert message', 'Info');
-      } catch (err) {
-        alert(err.stack) // eslint-disable-line
-      }
+      window.dialogs.alert('This is the alert message', 'Info');
     })
     .wait('#alert-dialog');
+}
+
+test('it work!', co.wrap(function * (t) {
+  const nightmare = createNightmare();
+
+  yield openAlert(nightmare);
 
   t.ok(nightmare.visible('#alert-dialog main'));
+
   yield nightmare.end();
   t.end();
 }));
