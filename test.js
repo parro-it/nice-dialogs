@@ -5,7 +5,7 @@ import co from 'co';
 
 function createNightmare() {
   return new Nightmare({
-    show: false,
+    show: true,
     'web-preferences': {
       preload: `${__dirname}/test-preload.js`,
       'web-security': false
@@ -22,12 +22,37 @@ function * openAlert(nightmare) {
     .wait('#alert-dialog');
 }
 
+function dialogIsOpened(nightmare) {
+  return nightmare.evaluate(() => document.querySelector('#alert-dialog').open);
+}
+
+function getTitle(nightmare) {
+  return nightmare.evaluate(() => document.querySelector('#alert-dialog h1').innerText);
+}
+
+function getMessage(nightmare) {
+  return nightmare.evaluate(() => document.querySelector('#alert-dialog main').innerText);
+}
+
 test('it work!', co.wrap(function * (t) {
   const nightmare = createNightmare();
 
   yield openAlert(nightmare);
 
   t.ok(nightmare.visible('#alert-dialog main'));
+
+  t.ok(yield dialogIsOpened(nightmare));
+
+  t.equal('This is the alert message', yield getMessage(nightmare));
+
+  t.equal('Info', yield getTitle(nightmare));
+
+  yield nightmare
+    .click('#alert-dialog .ok');
+
+  t.ok(!(yield dialogIsOpened(nightmare)));
+
+  // t.ok(!nightmare.visible('#alert-dialog main'));
 
   yield nightmare.end();
   t.end();
