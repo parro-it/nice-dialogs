@@ -52,17 +52,13 @@ test('it work!', co.wrap(function * (t) {
 
   t.ok(!(yield dialogIsOpened(nightmare)));
 
-  // t.ok(!nightmare.visible('#alert-dialog main'));
 
   yield nightmare.end();
   t.end();
 }));
 
 /*
-app.commands.register('alert', co.wrap(function * () {
-    yield app.dialogs.alert('This is the alert message', 'Info');
-    alert('message closed');
-  }));
+
   app.commands.register('confirm', co.wrap(function * () {
     const answer = yield app.dialogs.confirm('Are you really sure?', 'Question');
     alert('answer ' + answer);
