@@ -5,6 +5,6 @@ addons:
     packages:
       - xvfb
 install:
-  - npm install -g faucet eslint babel-cli es2015-node5 nightmare eslint-config-devenv babel-eslint
+  - npm install -g faucet eslint babel-cli babel-preset-es2015-node5 nightmare eslint-config-devenv babel-eslint
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
