@@ -29,7 +29,7 @@ module.exports = {
     return new Promise(resolve => {
       const onOk = () => {
         alertElm.close(true);
-        resolve();
+        resolve(true);
         btnOk.removeEventListener('click', onOk);
       };
 

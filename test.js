@@ -5,7 +5,7 @@ import co from 'co';
 
 function createNightmare() {
   return new Nightmare({
-    show: true,
+    show: false,
     'web-preferences': {
       preload: `${__dirname}/test-preload.js`,
       'web-security': false
@@ -13,33 +13,41 @@ function createNightmare() {
   });
 }
 
-const mkUtils = dialogSelector => ({
-  openAlert(nightmare) {
+const mkUtils = (dialogSelector, nightmare) => ({
+  openAlert() {
     return nightmare
       .goto('about://blank')
       .evaluate(() => {
-        window.dialogs.alert('This is the alert message', 'Info');
+        const msg = 'This is the alert message';
+        window.dialogs.alert(msg, 'Info').then( v => {
+          window._result = v;
+        });
       })
       .wait(dialogSelector);
   },
 
-  dialogIsOpened(nightmare) {
+  dialogIsOpened() {
     return nightmare.evaluate(s => document.querySelector(s).open, dialogSelector);
   },
 
-  getTitle(nightmare) {
+  getTitle() {
     return nightmare.evaluate(s => document.querySelector(s + ' h1').innerText, dialogSelector);
   },
 
-  getMessage(nightmare) {
+  * resolvedTo(value) {
+    const resolvedValue = yield nightmare.evaluate(() => window._result);
+    return value === resolvedValue;
+  },
+
+  getMessage() {
     return nightmare.evaluate(s => document.querySelector(s + ' main').innerText, dialogSelector);
   }
 });
 
+const nightmare = createNightmare();
 
 test('it work!', co.wrap(function * (t) {
-  const nightmare = createNightmare();
-  const utils = mkUtils('#alert-dialog');
+  const utils = mkUtils('#alert-dialog', nightmare);
 
   yield utils.openAlert(nightmare);
 
@@ -54,6 +62,7 @@ test('it work!', co.wrap(function * (t) {
     .click('#alert-dialog .ok');
 
   t.ok(!(yield utils.dialogIsOpened(nightmare)));
+  t.ok(yield utils.resolvedTo(true));
 
 
   yield nightmare.end();
