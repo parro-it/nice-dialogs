@@ -15,6 +15,11 @@ Awesome replace for alert, confirm & prompt js commands.
 [![NPM module](https://img.shields.io/npm/v/nice-dialogs.svg)](https://npmjs.org/package/nice-dialogs)
 [![NPM downloads](https://img.shields.io/npm/dt/nice-dialogs.svg)](https://npmjs.org/package/nice-dialogs)
 
+![alert](media/alert.png)
+![confirm](media/confirm.png)
+
+> Example of dialogs when styled using [Photon](https://github.com/connors/photon)
+
 ## Installation
 
 ```bash
