@@ -1,13 +1,20 @@
 .nice-dialogs {
   padding: 0;
-  background-color: $chrome-color;
+  background-color: #fff;
   border: 1px solid #bebebe;
   border-radius: 6px;
   box-shadow: 0 0 30px rgba(0,0,0,.1);
   overflow: hidden;
 }
+
+/*
+.nice-dialogs::backdrop {
+  background-color: #fff;
+}
+*/
+
 .nice-dialogs header h1 {
-    font-size: large;
+  font-size: large;
 }
 .nice-dialogs main {
   padding:20px;
