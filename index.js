@@ -1,6 +1,9 @@
 const readFileSync = require('fs').readFileSync;
 const alertTemplate = readFileSync(`${__dirname}/src/alert-template.html`);
 const confirmTemplate = readFileSync(`${__dirname}/src/confirm-template.html`);
+const style = readFileSync(`${__dirname}/src/style.css`);
+const insertCss = require('insert-css');
+insertCss(style);
 
 function createElement(template) {
   const placeHolder = document.createElement('div');
