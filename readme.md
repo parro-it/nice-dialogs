@@ -2,6 +2,13 @@
 
 Awesome replace for alert, confirm & prompt js commands.
 
+> This is built with [Electron](https://github.com/atom/electron) usage in minf, but should flawlessy work
+> on any modern browser that support dialog element. The module is tested
+> only on Electron. Open an issue if you find bugs on browsers.
+
+> Templates use CSS classes from [Photon](https://github.com/connors/photon)
+> However, Photon css file are not included, so you can style it whatever you whant.
+
 [![Travis Build Status](https://img.shields.io/travis/parro-it/nice-dialogs.svg)](http://travis-ci.org/parro-it/nice-dialogs)
 [![NPM module](https://img.shields.io/npm/v/nice-dialogs.svg)](https://npmjs.org/package/nice-dialogs)
 [![NPM downloads](https://img.shields.io/npm/dt/nice-dialogs.svg)](https://npmjs.org/package/nice-dialogs)
@@ -15,7 +22,12 @@ npm install --save nice-dialogs
 ## Usage
 
 ```javascript
-  const niceDialogs = require('nice-dialogs');
+  const dialogs = require('nice-dialogs');
+  dialogs.confirm('Are you sure?', 'title')
+    .then(result => console.log(result))  // true/false
+
+  dialogs.alert('Something happened!', 'Title')
+    .then(result => console.log(result))  // always true
 ```
 
 ## License
@@ -23,21 +35,3 @@ npm install --save nice-dialogs
 MIT License.
 
 Copyright (c) 2015 Andrea Parodi
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
-THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
