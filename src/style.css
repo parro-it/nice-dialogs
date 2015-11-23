@@ -6,7 +6,9 @@
   box-shadow: 0 0 30px rgba(0,0,0,.1);
   overflow: hidden;
 }
-
+.nice-dialogs header h1 {
+    font-size: large;
+}
 .nice-dialogs main {
   padding:20px;
   font-size: 14pt;
