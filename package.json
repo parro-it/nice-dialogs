@@ -6,33 +6,18 @@
   "license": "MIT",
   "author": "parro-it",
   "scripts": {
-    "build": "babel src/index.js > index.js",
-    "test": "eslint . && babel-node test | faucet",
-    "prepublish": "npm run build"
+    "test": "eslint . && node test | faucet"
   },
   "keywords": [],
-  "engines": {
-    "node": ">=5"
-  },
   "eslintConfig": {
     "extends": "eslint-config-devenv"
   },
-  "babel": {
-    "presets": [
-      "es2015-node5"
-    ]
-  },
-  "esnext:main": "src/index.js",
   "devDependencies": {
-    "babel-preset-es2015-node5": "^1.0.0",
     "co": "^4.6.0",
     "nightmare": "^2.0.7",
     "tape": "^4.2.2"
   },
   "files": [
-    "readme.md",
-    "index.js",
-    "src/index.js"
-  ],
-  "dependencies": {}
+    "src"
+  ]
 }

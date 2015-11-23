@@ -1,7 +1,7 @@
-import test from 'tape';
-// import niceDialogs from './src';
-import Nightmare from 'nightmare';
-import co from 'co';
+const test = require('tape');
+// const niceDialogs = require('./src');
+const Nightmare = require('nightmare');
+const co = require('co');
 
 function createNightmare() {
   return new Nightmare({
@@ -115,11 +115,3 @@ test('awake', co.wrap(function * (t) {
   t.end();
 }));
 
-
-/*
-
-  app.commands.register('confirm', co.wrap(function * () {
-    const answer = yield app.dialogs.confirm('Are you really sure?', 'Question');
-    alert('answer ' + answer);
-  }));
-*/
