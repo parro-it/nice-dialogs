@@ -9,6 +9,8 @@ Awesome replace for alert, confirm & prompt js commands.
 > Templates use CSS classes from [Photon](https://github.com/connors/photon).
 > However, Photon css file are not included, so you can style it whatever you whant.
 
+> We provide only the commonjs module. If you want to use it in a browser, you can use [browserify](https://github.com/substack/node-browserify) to bundle it with your code. Be sure to include [brfs](https://www.npmjs.com/package/brfs) transform, because assets are read using `fs.readFileSync` and you want to include their content in your bundle.
+
 [![Travis Build Status](https://img.shields.io/travis/parro-it/nice-dialogs.svg)](http://travis-ci.org/parro-it/nice-dialogs)
 [![NPM module](https://img.shields.io/npm/v/nice-dialogs.svg)](https://npmjs.org/package/nice-dialogs)
 [![NPM downloads](https://img.shields.io/npm/dt/nice-dialogs.svg)](https://npmjs.org/package/nice-dialogs)
@@ -29,6 +31,9 @@ npm install --save nice-dialogs
   dialogs.alert('Something happened!', 'Title')
     .then(result => console.log(result))  // always true
 ```
+
+
+
 
 ## License
 
