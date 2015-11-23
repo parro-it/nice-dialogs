@@ -1,6 +1,6 @@
 const readFileSync = require('fs').readFileSync;
-const alertTemplate = readFileSync(`${__dirname}/alert-template.html`);
-const confirmTemplate = readFileSync(`${__dirname}/confirm-template.html`);
+const alertTemplate = readFileSync(`${__dirname}/src/alert-template.html`);
+const confirmTemplate = readFileSync(`${__dirname}/src/confirm-template.html`);
 
 function createElement(template) {
   const placeHolder = document.createElement('div');
@@ -15,7 +15,7 @@ function dialog(dialogElm, resolve) {
 
   function clear() {
     for (const btn of buttons) {
-      btn.elm.removeEventListener('click', btn.onClick);
+      btn.onclick = null;
     }
   }
 
@@ -26,11 +26,8 @@ function dialog(dialogElm, resolve) {
       clear();
     };
 
-    elm.addEventListener('click', onClick);
-    buttons.push({
-      elm: elm,
-      onClick: onClick
-    });
+    elm.onclick = onClick;
+    buttons.push(elm);
   };
 }
 
