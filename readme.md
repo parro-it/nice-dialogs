@@ -6,7 +6,7 @@ Awesome replace for alert, confirm & prompt js commands.
 > on any modern browser that support the [dialog](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) element. The module is tested
 > only on Electron. Open an issue if you find bugs on some other browser engine.
 
-> Templates use CSS classes from [Photon](https://github.com/connors/photon)
+> Templates use CSS classes from [Photon](https://github.com/connors/photon).
 > However, Photon css file are not included, so you can style it whatever you whant.
 
 [![Travis Build Status](https://img.shields.io/travis/parro-it/nice-dialogs.svg)](http://travis-ci.org/parro-it/nice-dialogs)
