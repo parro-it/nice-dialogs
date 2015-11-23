@@ -1,2 +1,2 @@
 require('nightmare/lib/preload');
-window.dialogs = require(`${__dirname}/src/index.js`);
+window.dialogs = require(`${__dirname}/index.js`);
